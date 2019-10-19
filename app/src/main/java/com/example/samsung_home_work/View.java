@@ -1,7 +1,9 @@
 package com.example.samsung_home_work;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+
+/*setContentView(new MyDraw(this));
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,4 +12,4 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(new MyView(this));
     }
-}
+}*/
