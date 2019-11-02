@@ -21,5 +21,12 @@ public class MyView extends View {
                     this.getWidth()-70, y-70, paint);
             y += 30;
         }
+        paint.setColor(Color.YELLOW);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(300, 300, 200, paint);
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(20);
+        canvas.drawCircle(700, 300, 200, paint);
     }
 }
