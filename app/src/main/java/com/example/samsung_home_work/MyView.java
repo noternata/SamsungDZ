@@ -11,22 +11,12 @@ public class MyView extends View {
    MyView(Context context) {
        super(context);
    }
-
+    Paint paint = new Paint();
+    float x = 0;
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint paint = new Paint();
-        int y = 0;
-        while (y < canvas.getHeight()) {
-            canvas.drawLine( 0, y,
-                    this.getWidth()-70, y-70, paint);
-            y += 30;
-        }
-        paint.setColor(Color.YELLOW);
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(300, 300, 200, paint);
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(20);
-        canvas.drawCircle(700, 300, 200, paint);
+        canvas.drawCircle(x, 300, 20, paint);
+        x += 0.5f;
+        invalidate();
     }
 }
