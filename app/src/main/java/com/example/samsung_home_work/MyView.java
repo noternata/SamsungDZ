@@ -5,70 +5,55 @@ import android.content.Context;
 import android.graphics.*;
 import android.view.View;
 
-import java.util.Random;
-
 
 public class MyView extends View {
-    int N = (int) (Math.random() * 50); // количество шариков
+    int N = 10; // количество шариков
     float[] x  = new float[N];
     float[] y  = new float[N];
     float[] vx = new float[N];
     float[] vy = new float[N];
 
-   public MyView(Context context) {
-       super(context);
-       for (int i = 0; i < N; i++){
-           x[i] = (float)(Math.random() * 500);
-           y[i] = (float)(Math.random() * 500);
-           vx[i] = (float)(Math.random() * 12 - 3);
-           vy[i] = (float)(Math.random() * 12 - 3);
-       }
-   }
+    float rand(float min , float max){
+        return (float)(Math.random() * (max - min + 1)) + min;
+    }
 
+    void fillRandom(float[] array , float min, float max){
+        for (int i = 0; i < array.length; i++){
+            array[i] = rand (min, max);
+        }
+    }
+
+    MyView(Context context) {
+        super(context);
+        fillRandom(x, 0, 500);
+        fillRandom(y, 0, 500);
+        fillRandom(vx, -3, 3);
+        fillRandom(vy, 500,-5);
+
+    }
+
+    void add(float[] array , float[] values){
+        for (int i = 0; i < array.length; i++){
+            array[i] += values[i];
+        }
+    }
+    /*void drawBalls(Canvas canvas){
+        for (int i = 0; i < N; i++) {
+            canvas.drawCircle(x[i], y[i], 20, paint);
+        }
+    }*/
+
+    Paint paint = new Paint();
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint paint = new Paint();
-
-        for (int i = 0; i < N; i++) {
-            if ((x[i] < 0 || x[i] > this.getWidth()) || (y[i] < 0 || y[i] > this.getHeight())){
-                paint.setColor(Color.argb(0,0,0,0));
-            }
-            else {
-                paint.setColor(Color.RED);
-            }
-        }
         // отрисовываем все шарики
-        for (int i = 0; i < N - 1; i++) {
-
-            canvas.drawLine(x[i], y[i], x[i + 1], y[i + 1], paint);
-
+        for (int i = 0; i < N; i++) {
+            canvas.drawCircle(x[i], y[i], 20, paint);
         }
         // готовим массивы x и у для следущего кадра
-        for (int i = 0; i < N; i++) {
-            x[i] += vx[i];
-            y[i] += vy[i];
-            if (x[i] < 0 || x[i] > this.getWidth()){
-                vx[i] = - vx[i];
-                //paint.setColor(Color.argb(0,0,0,0));
-            }
-            if (y[i] < 0 || y[i] > this.getHeight()) {
-                vy[i] = -vy[i];
-            }
-
-            if ((x[i] < 0 || x[i] > this.getWidth()) && (y[i] < 0 || y[i] > this.getHeight())) {
-
-                vx[i] = rand(0 , this.getWidth());
-
-                vy[i] = rand(0, this.getHeight());
-
-            }
-        }
+        add(x, vx);
+        add(y, vy);
         //запрашиваем перерисовку
         invalidate();
     }
-
-    float rand (float start, float end) {
-        return (float) (Math.random() * end);
-    }
 }
-
