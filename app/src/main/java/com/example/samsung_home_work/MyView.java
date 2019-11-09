@@ -37,19 +37,17 @@ public class MyView extends View {
             array[i] += values[i];
         }
     }
-    /*void drawBalls(Canvas canvas){
+    void drawBalls(Canvas canvas){
         for (int i = 0; i < N; i++) {
             canvas.drawCircle(x[i], y[i], 20, paint);
         }
-    }*/
+    }
 
     Paint paint = new Paint();
     @Override
     protected void onDraw(Canvas canvas) {
         // отрисовываем все шарики
-        for (int i = 0; i < N; i++) {
-            canvas.drawCircle(x[i], y[i], 20, paint);
-        }
+        drawBalls(canvas);
         // готовим массивы x и у для следущего кадра
         add(x, vx);
         add(y, vy);
