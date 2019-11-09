@@ -36,12 +36,14 @@ public class CellsActivity extends Activity implements OnClickListener,
     }
 
     void generate() {
+        Task.showMessage(this, "Перекрасить все клетки в черный" +
+                "Примечание:при нажатии на кнопку вся строка и столбец перекрашиваются в черный ");
         for (int i = 0; i < HEIGHT; i++)
             for (int j = 0; j < WIDTH; j++) {
                 //ADD YOUR CODE HERE
                 //Добавляем всем кнопкам текст с номером
-                cells[i][j].setText(num + "");
-                num++;
+                //cells[i][j].setText(num + "");
+                //num++;
 
             }
         //Вначале примерно половина клеток будет желтой
@@ -49,7 +51,7 @@ public class CellsActivity extends Activity implements OnClickListener,
             for (int j = 0; j < WIDTH; j++)
                 if (Math.random() >= 0.5)
                 {
-                    cells[i][j].setBackgroundColor(Color.YELLOW);
+                    cells[i][j].setBackgroundColor(Color.BLACK);
                 }
     }
 
@@ -73,11 +75,11 @@ public class CellsActivity extends Activity implements OnClickListener,
         //Покрасим все клетки столбца и строки нажатой кнопки в красный цвет
         for (int x = 0; x < WIDTH; x++)
         {
-            cells[tappedY][x].setBackgroundColor(Color.RED);
+            cells[tappedY][x].setBackgroundColor(Color.BLACK);
         }
         for (int y = 0; y < WIDTH; y++)
         {
-            cells[y][tappedX].setBackgroundColor(Color.RED);
+            cells[y][tappedX].setBackgroundColor(Color.BLACK);
         }
 
     }
