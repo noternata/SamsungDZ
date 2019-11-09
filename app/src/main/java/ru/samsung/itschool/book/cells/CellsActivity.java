@@ -2,6 +2,7 @@ package ru.samsung.itschool.book.cells;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ public class CellsActivity extends Activity implements OnClickListener,
     private int HEIGHT = 10;
 
     private Button[][] cells;
+    private int num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,38 +36,49 @@ public class CellsActivity extends Activity implements OnClickListener,
     }
 
     void generate() {
-
-        //Эту строку нужно удалить
-        Task.showMessage(this, "Добавьте код в функцию активности generate() для генерации клеточного поля");
-
-
         for (int i = 0; i < HEIGHT; i++)
             for (int j = 0; j < WIDTH; j++) {
                 //ADD YOUR CODE HERE
-                //....
+                //Добавляем всем кнопкам текст с номером
+                cells[i][j].setText(num + "");
+                num++;
 
             }
+        //Вначале примерно половина клеток будет желтой
+        for (int i = 0; i < HEIGHT; i++)
+            for (int j = 0; j < WIDTH; j++)
+                if (Math.random() >= 0.5)
+                {
+                    cells[i][j].setBackgroundColor(Color.YELLOW);
+                }
     }
 
     @Override
     public boolean onLongClick(View v) {
         //Эту строку нужно удалить
-        Stub.show(this, "Добавьте код в функцию активности onLongClick() - реакцию на долгое нажатие на клетку");
+        //Stub.show(this, "Добавьте код в функцию активности onLongClick() - реакцию на долгое нажатие на клетку");
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        //Эту строку нужно удалить
-        Stub.show(this, "Добавьте код в функцию активности onClick() - реакцию на нажатие на клетку");
 
         Button tappedCell = (Button) v;
+
 
         //Получаем координтаты нажатой клетки
         int tappedX = getX(tappedCell);
         int tappedY = getY(tappedCell);
         //ADD YOUR CODE HERE
-        //....
+        //Покрасим все клетки столбца и строки нажатой кнопки в красный цвет
+        for (int x = 0; x < WIDTH; x++)
+        {
+            cells[tappedY][x].setBackgroundColor(Color.RED);
+        }
+        for (int y = 0; y < WIDTH; y++)
+        {
+            cells[y][tappedX].setBackgroundColor(Color.RED);
+        }
 
     }
 
